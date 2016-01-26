@@ -11,14 +11,6 @@
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
-Route::get('/', function () {
-    return view('jumbotron');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -31,5 +23,24 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/', function () {
+        return view('pages.index');
+    });
+
+    Route::get('/list', function () {
+        return view('pages.list');
+    });
+
+    Route::get('/item', function () {
+        return view('pages.item');
+    });
+
+    Route::get('/write', function () {
+        return view('pages.write');
+    });
+
+    Route::get('/login', function () {
+        return view('pages.login');
+    });
+
 });
