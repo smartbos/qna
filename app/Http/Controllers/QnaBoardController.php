@@ -13,7 +13,7 @@ class QnaBoardController extends Controller
 {
     function get_list()
     {
-        $posts = QnaPost::with('writer')->paginate(10);
+        $posts = QnaPost::with('writer')->orderBy('id', 'desc')->paginate(10);
         return view('pages.list', ['posts' => $posts]);
     }
 
