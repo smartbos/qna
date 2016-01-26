@@ -38,9 +38,10 @@
                 <li role="presentation" class="active"><a href="#">Home</a></li>
                 <li role="presentation"><a href="#">About</a></li>
                 <li role="presentation"><a href="#">Contact</a></li>
+                <li role="presentation"><a href="/auth/login">Login</a></li>
             </ul>
         </nav>
-        <h3 class="text-muted">Project name</h3>
+        <h3 class="text-muted"><a href="/">ModernPUG</a></h3>
     </div>
 
     @yield('content')

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Socialite;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -44,7 +45,7 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -59,7 +60,7 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
@@ -88,9 +89,39 @@ class AuthController extends Controller
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('github')->user();
+        try {
+            $user = Socialite::driver('github')->user();
+        } catch (Exception $e) {
+            //return redirect('auth/github');
+            return redirect('auth/login');
+        }
 
-        // $user->token;
-        dd($user);
+        $authUser = $this->findOrCreateUser($user);
+
+        Auth::login($authUser, true);
+
+        return redirect('/');
+    }
+
+    /**
+     * Return user if exists; create and return if doesn't
+     *
+     * @param $githubUser
+     * @return User
+     */
+    private function findOrCreateUser($githubUser)
+    {
+        $authUser = User::where('github_id', $githubUser->id)->first();
+
+        if ($authUser) {
+            return $authUser;
+        }
+
+        return User::create([
+            'name' => $githubUser->name,
+            'email' => $githubUser->email,
+            'github_id' => $githubUser->id,
+            'avatar' => $githubUser->avatar,
+        ]);
     }
 }

@@ -42,7 +42,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.write');
     });
 
-    Route::get('/login', function () {
+    Route::get('/auth/login', function () {
         return view('pages.login');
     });
 
