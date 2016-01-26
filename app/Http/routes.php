@@ -27,6 +27,9 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.index');
     });
 
+    Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
+    Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
+
     Route::get('/list', function () {
         return view('pages.list');
     });
