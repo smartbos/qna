@@ -27,23 +27,30 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.index');
     });
 
-    Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
-    Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
+    Route::get('about', function () {
+        return view('pages.about');
+    });
 
-    Route::get('/list', function () {
+    Route::get('list', function () {
         return view('pages.list');
     });
 
-    Route::get('/item', function () {
+    Route::get('item', function () {
         return view('pages.item');
     });
 
-    Route::get('/write', function () {
+    Route::get('write', function () {
         return view('pages.write');
     });
 
-    Route::get('/auth/login', function () {
+    Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
+    Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
+    Route::get('auth/login', function () {
         return view('pages.login');
+    });
+    Route::get('auth/logout', function () {
+        \Auth::logout();
+        return redirect('auth/login');
     });
 
 });
