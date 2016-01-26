@@ -2,6 +2,6 @@
 
 @section('content')
 
-ModernPUG!
+ModernPUG About!
 
 @endsection
