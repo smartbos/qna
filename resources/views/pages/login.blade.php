@@ -10,7 +10,10 @@
 @else
 <div class="row">
     <div class="col-lg-12">
-        <a class="btn btn-danger" href="/auth/logout">로그아웃</a>
+        <form method="post" action="/auth/logout">
+            {{ csrf_field() }}
+            <button class="btn btn-danger">로그아웃</button>
+        </form>
     </div>
 </div>
 @endunless

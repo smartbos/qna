@@ -23,6 +23,7 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
+
     Route::get('/', function () {
         return view('pages.index');
     });
@@ -45,12 +46,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
     Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');
-    Route::get('auth/login', function () {
-        return view('pages.login');
-    });
-    Route::get('auth/logout', function () {
-        \Auth::logout();
-        return redirect('auth/login');
-    });
+    Route::get('auth/login', 'Auth\AuthController@login');
+    Route::post('auth/logout', 'Auth\AuthController@logout');
 
 });
