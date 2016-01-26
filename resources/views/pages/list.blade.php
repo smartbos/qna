@@ -20,7 +20,10 @@
     <tr>
         <th scope="row">{{ $post->id }}</th>
         <td><a href="/qna/{{ $post->id }}">{{ $post->title }}</a></td>
-        <td>{{ $post->writer->name }}</td>
+        <td>
+            <img src="{{ $post->writer->avatar }}" width="16px" height="16px" />
+            {{ $post->writer->name }}
+        </td>
         <td>{{ $post->created_at }}</td>
     </tr>
     @endforeach
