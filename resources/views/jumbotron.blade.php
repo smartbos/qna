@@ -8,9 +8,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="/favicon.ico">
 
-    <title>Narrow Jumbotron Template for Bootstrap</title>
+    <title>ModernPUG</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,12 +35,18 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation"><a href="/about">About</a></li>
-                @unless(Auth::check())
-                <li role="presentation"><a href="/auth/login">Login</a></li>
-                @else
-                <li role="presentation"><a href="/auth/login">{{ Auth::user()->name }}</a></li>
-                @endunless
+                <li role="presentation"{!! Request::path() == 'about' ? ' class="active"' : '' !!}>
+                    <a href="/about">About</a>
+                </li>
+                <li role="presentation"{!! Request::path() == 'auth/login' ? ' class="active"' : '' !!}>
+                    <a href="/auth/login">
+                        @unless(Auth::check())
+                        Login
+                        @else
+                        {{ Auth::user()->name }}
+                        @endunless
+                    </a>
+                </li>
             </ul>
         </nav>
         <h3 class="text-muted"><a href="/">ModernPUG</a></h3>
