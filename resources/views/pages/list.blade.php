@@ -3,9 +3,9 @@
 @section('content')
 
 <h2>Q&A</h2>
-<p>
-    <a class="btn btn-success" href="/qna/write">질문하기</a>
-</p>
+@if(Auth::check())
+<p><a class="btn btn-success" href="/qna/write">질문하기</a></p>
+@endif
 <table class="table table-bordered">
     <thead>
     <tr>
