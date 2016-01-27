@@ -2,21 +2,20 @@
 
 @section('content')
 
-@can('qna-edit', $q)
-<!-- 수정, 삭제 버튼 -->
+<!-- 질문내용 -->
+<h1>{{ $q->title }}</h1>
 <form method="POST" action="/qs/{{ $q->id }}/delete">
     {{ csrf_field() }}
     {{ method_field('DELETE') }}
-    <a class="btn btn-default" href="/qs/{{ $q->id }}/edit">수정</a>
-    <button class="btn btn-danger">삭제</button>
+    {{ $q->created_at }}
+    @can('qna-edit', $q)
+    <a class="btn btn-xs btn-default" href="/qs/{{ $q->id }}/edit">수정</a>
+    <button class="btn btn-xs btn-danger">삭제</button>
+    @endcan
+    - <b>{{ $q->writer->name }}</b>
 </form>
-@endcan
-
-<!-- 질문내용 -->
-<h1>{{ $q->title }}</h1>
-<p>
-    {{ $q->content }}
-</p>
+<br/>
+<p>{{ $q->content }}</p>
 
 <!-- 답변내용 -->
 @foreach($q->answers as $a)
@@ -27,8 +26,10 @@
     {{ csrf_field() }}
     {{ method_field('DELETE') }}
     <a href="{{ '#'.$a->id }}">{{ $a->created_at }}</a>
+    @can('qna-edit', $a)
     <a class="btn btn-xs btn-default" href="/as/{{ $a->id }}/edit">수정</a>
     <button class="btn btn-xs btn-danger">삭제</button>
+    @endcan
     - <b>{{ $a->writer->name }}</b>
 </form>
 </p>
