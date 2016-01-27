@@ -32,8 +32,7 @@ class CreateQnaTables extends Migration
 
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('commentable_id')->index();
-            $table->string('commentable_type', 30)->index();
+            $table->morphs('commentable');
             $table->longText('content');
             $table->integer('writer_id')->index();
             $table->timestamps();
