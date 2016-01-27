@@ -27,5 +27,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
         //
+        $gate->define('qna-write', function ($user) {
+            return $user;
+        });
+
+        $gate->define('qna-edit', function ($user, $post) {
+            return $user->id === $post->writer_id;
+        });
     }
 }

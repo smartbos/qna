@@ -25,13 +25,29 @@ class QnaBoardController extends Controller
 
     public function get_write()
     {
+        $this->authorize('qna-write');
+
         return view('pages.write');
     }
 
     public function post_write(Request $request)
     {
+        $this->authorize('qna-write');
+
         $request->merge(['writer_id' => Auth::user()->id]);
         $post = QnaPost::create($request->all());
         return redirect("qna/{$post->id}");
+    }
+
+    public function get_edit($post_id)
+    {
+        $post = QnaPost::find($post_id);
+        $this->authorize('qna-edit', $post);
+    }
+
+    public function put_edit($post_id)
+    {
+        $post = QnaPost::find($post_id);
+        $this->authorize('qna-edit', $post);
     }
 }

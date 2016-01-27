@@ -34,6 +34,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('qna/write', 'QnaBoardController@get_write');
     Route::post('qna/write', 'QnaBoardController@post_write');
+    Route::get('qna/{post_id}/edit', 'QnaBoardController@get_edit');
+    Route::put('qna/{post_id}/edit', 'QnaBoardController@put_edit');
     Route::get('qna/{post_id}', 'QnaBoardController@get_item');
     Route::get('qna', 'QnaBoardController@get_list');
 
