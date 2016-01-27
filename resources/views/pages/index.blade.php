@@ -12,7 +12,7 @@
 
 <div class="row marketing">
     <div class="col-lg-6">
-        <h4><a href="/qna">Q&A</a></h4>
+        <h4><a href="/qs">Q&A</a></h4>
         <p>PHP에 대하여 궁금한 것을 질문하세요.</p>
 
         <h4>Subheading</h4>

@@ -4,7 +4,7 @@
 
 <h2>질문수정하기</h2>
 
-<form method="post" action="/qna/{{ $q->id }}">
+<form method="post" action="/qs/{{ $q->id }}/edit">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     <div class="form-group">

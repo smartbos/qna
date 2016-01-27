@@ -4,7 +4,7 @@
 
 <h2>질문하기</h2>
 
-<form method="post" action="/qna/write">
+<form method="post" action="/qs/write">
     {{ csrf_field() }}
     <div class="form-group">
         <label for="title">제목</label>

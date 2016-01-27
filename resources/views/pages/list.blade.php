@@ -4,7 +4,7 @@
 
 <h2>Q&A</h2>
 @if(Auth::check())
-<p><a class="btn btn-success" href="/qna/write">질문하기</a></p>
+<p><a class="btn btn-success" href="/qs/write">질문하기</a></p>
 @endif
 <table class="table table-bordered">
     <thead>
@@ -19,7 +19,7 @@
     @foreach($qs as $q)
     <tr>
         <th scope="row">{{ $q->id }}</th>
-        <td><a href="/qna/{{ $q->id }}">{{ $q->title }}</a></td>
+        <td><a href="/qs/{{ $q->id }}">{{ $q->title }}</a></td>
         <td>
             <img src="{{ $q->writer->avatar }}" width="16px" height="16px" />
             {{ $q->writer->name }}

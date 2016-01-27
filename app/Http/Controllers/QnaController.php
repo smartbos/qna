@@ -24,7 +24,7 @@ class QnaController extends Controller
 
         $request->merge(['writer_id' => Auth::user()->id]);
         $q = Question::create($request->all());
-        return redirect("qna/{$q->id}");
+        return redirect("qs/{$q->id}");
     }
 
     public function get_edit($q_id)
@@ -41,13 +41,13 @@ class QnaController extends Controller
         $this->authorize('qna-edit', $q);
         $input = $request->only(['title', 'content']);
         Question::where('id', $q_id)->update($input);
-        return redirect("qna/{$q->id}");
+        return redirect("qs/{$q->id}");
     }
 
     public function delete_item($q_id)
     {
         Question::find($q_id)->delete();
-        return redirect('qna');
+        return redirect('qs');
     }
 
     function get_list()
