@@ -7,7 +7,7 @@
 <form method="POST" action="/qs/{{ $q->id }}/delete">
     {{ csrf_field() }}
     {{ method_field('DELETE') }}
-    {{ $q->created_at }}
+    <a href="/qs/{{ $q->id }}">{{ $q->created_at }}</a>
     @can('qna-edit', $q)
     <a class="btn btn-xs btn-default" href="/qs/{{ $q->id }}/edit">수정</a>
     <button class="btn btn-xs btn-danger">삭제</button>
