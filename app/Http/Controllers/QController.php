@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Answer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Auth;
 
-class QnaController extends Controller
+class QController extends Controller
 {
     public function get_write()
     {
@@ -59,6 +59,7 @@ class QnaController extends Controller
     function get_item($q_id)
     {
         $q = Question::find($q_id);
-        return view('pages.item', ['q' => $q]);
+        $as = Answer::where('q_id', $q->id)->get();
+        return view('pages.item', ['q' => $q, 'as' => $as]);
     }
 }

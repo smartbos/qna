@@ -23,6 +23,7 @@ class CreateQnaTables extends Migration
 
         Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('q_id')->index();
             $table->longText('content');
             $table->integer('writer_id')->index();
             $table->timestamps();
