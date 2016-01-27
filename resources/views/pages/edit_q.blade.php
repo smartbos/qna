@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>질문수정하기</h2>
+<h2>질문 수정하기</h2>
 
 <form method="post" action="/qs/{{ $q->id }}/edit">
     {{ csrf_field() }}
@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <label for="content">내용</label>
-        <textarea class="form-control" id="content" name="content" placeholder="제목"
+        <textarea class="form-control" id="content" name="content" placeholder="내용"
                   rows="20">{{ $q->content }}</textarea>
     </div>
     <button type="submit" class="btn btn-default">저장</button>

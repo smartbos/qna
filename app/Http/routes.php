@@ -40,7 +40,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('qs', 'QController@get_list');
     Route::get('qs/{q_id}', 'QController@get_item');
 
-    Route::post('qs/{q_id}/as/write', 'AController@post_write');
+    Route::post('as/write', 'AController@post_write');
+    Route::get('as/{a_id}/edit', 'AController@get_edit');
+    Route::put('as/{a_id}/edit', 'AController@put_edit');
+    Route::delete('as/{a_id}/delete', 'AController@delete_item');
 
     Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
     Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');

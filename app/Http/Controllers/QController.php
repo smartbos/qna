@@ -14,14 +14,12 @@ class QController extends Controller
     public function get_write()
     {
         $this->authorize('qna-write');
-
         return view('pages.write');
     }
 
     public function post_write(Request $request)
     {
         $this->authorize('qna-write');
-
         $request->merge(['writer_id' => Auth::user()->id]);
         $q = Question::create($request->all());
         return redirect("qs/{$q->id}");
@@ -31,8 +29,7 @@ class QController extends Controller
     {
         $q = Question::find($q_id);
         $this->authorize('qna-edit', $q);
-
-        return view('pages.edit', ['q' => $q]);
+        return view('pages.edit_q', ['q' => $q]);
     }
 
     public function put_edit(Request $request, $q_id)
@@ -40,13 +37,15 @@ class QController extends Controller
         $q = Question::find($q_id);
         $this->authorize('qna-edit', $q);
         $input = $request->only(['title', 'content']);
-        Question::where('id', $q_id)->update($input);
+        $q->where('id', $q_id)->update($input);
         return redirect("qs/{$q->id}");
     }
 
     public function delete_item($q_id)
     {
-        Question::find($q_id)->delete();
+        $q = Question::find($q_id);
+        $this->authorize('qna-edit', $q);
+        $q->delete();
         return redirect('qs');
     }
 
@@ -58,8 +57,7 @@ class QController extends Controller
 
     function get_item($q_id)
     {
-        $q = Question::find($q_id);
-        $as = Answer::where('q_id', $q->id)->get();
-        return view('pages.item', ['q' => $q, 'as' => $as]);
+        $q = Question::with('answers')->find($q_id);
+        return view('pages.item', ['q' => $q]);
     }
 }
