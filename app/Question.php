@@ -22,4 +22,9 @@ class Question extends Model
     {
         return $this->hasMany('App\Answer', 'q_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'parent_id');
+    }
 }

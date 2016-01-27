@@ -5,12 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Answer extends Model
+class Comment extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'q_id', 'content', 'writer_id',
+        'parent_id', 'parent_answer', 'content', 'writer_id',
     ];
 
     public function writer()
@@ -18,13 +18,13 @@ class Answer extends Model
         return $this->hasOne('App\User', 'id', 'writer_id');
     }
 
-    public function comments()
-    {
-        return $this->hasMany('App\Comment', 'parent_id');
-    }
-
     public function question()
     {
-        return $this->belongsTo('App\Question', 'q_id');
+        return $this->belongsTo('App\Question', 'parent_id');
+    }
+
+    public function answer()
+    {
+        return $this->belongsTo('App\Answer', 'parent_id');
     }
 }

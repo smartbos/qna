@@ -13,7 +13,6 @@ class AController extends Controller
     public function post_write(Request $request)
     {
         $this->authorize('qna-write');
-
         $request->merge(['writer_id' => Auth::user()->id]);
         $a = Answer::create($request->all());
         return redirect("qs/{$a->q_id}#{$a->id}");
@@ -23,7 +22,6 @@ class AController extends Controller
     {
         $a = Answer::find($a_id);
         $this->authorize('qna-edit', $a);
-
         return view('pages.edit_a', ['a' => $a]);
     }
 

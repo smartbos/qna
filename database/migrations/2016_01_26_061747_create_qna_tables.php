@@ -29,6 +29,16 @@ class CreateQnaTables extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('comments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('parent_id')->index();
+            $table->boolean('parent_answer')->index();
+            $table->longText('content');
+            $table->integer('writer_id')->index();
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -40,5 +50,6 @@ class CreateQnaTables extends Migration
     {
         Schema::drop('questions');
         Schema::drop('answers');
+        Schema::drop('comments');
     }
 }
