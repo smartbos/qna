@@ -10,7 +10,7 @@ class Comment extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'parent_id', 'parent_answer', 'content', 'writer_id',
+        'commentable_id', 'commentable_type', 'content', 'writer_id',
     ];
 
     public function writer()
@@ -18,13 +18,18 @@ class Comment extends Model
         return $this->hasOne('App\User', 'id', 'writer_id');
     }
 
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
+
     public function question()
     {
-        return $this->belongsTo('App\Question', 'parent_id');
+        return $this->belongsTo('App\Question', 'commentable_id');
     }
 
     public function answer()
     {
-        return $this->belongsTo('App\Answer', 'parent_id');
+        return $this->belongsTo('App\Answer', 'commentable_id');
     }
 }

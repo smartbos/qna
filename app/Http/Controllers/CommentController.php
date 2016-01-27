@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use App\Comment;
+use App\Question;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,6 +16,16 @@ class CommentController extends Controller
     {
         $this->authorize('qna-write');
         $request->merge(['writer_id' => Auth::user()->id]);
+        $ctype = $request->input('commentable_type');
+        switch($ctype) {
+            case 'q':
+                $ctype = Question::class;
+                break;
+            case 'a':
+                $ctype = Answer::class;
+                break;
+        }
+        $request->merge(['commentable_type' => $ctype]);
         $c = Comment::create($request->all());
         $redirectUrl = $this->getRedirectUrlWithComment($c);
         return redirect($redirectUrl);
@@ -47,8 +59,16 @@ class CommentController extends Controller
 
     private function getRedirectUrlWithComment($c)
     {
-        $q_id = $c->parent_answer ? $c->answer->question->id : $c->parent_id;
-        $redirectUrl = "qs/{$q_id}" . ($c->parent_answer ? "#{$c->parent_id}" : '');
-        return $redirectUrl;
+        $ctype = $c->commentable_type;
+        $subUrl = '';
+        switch($ctype) {
+            case Question::class:
+                $subUrl = $c->commentable_id;
+                break;
+            case Answer::class:
+                $subUrl = $c->answer->question->id."#{$c->commentable_id}";
+                break;
+        }
+        return "qs/$subUrl";
     }
 }

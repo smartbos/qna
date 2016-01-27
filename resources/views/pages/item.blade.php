@@ -50,8 +50,8 @@
     <hr/>
     <form class="form-inline" method="POST" action="/comments/write">
         {{ csrf_field() }}
-        <input type="hidden" name="parent_id" value="{{ $q->id }}"/>
-        <input type="hidden" name="parent_answer" value="0"/>
+        <input type="hidden" name="commentable_id" value="{{ $q->id }}"/>
+        <input type="hidden" name="commentable_type" value="q"/>
         <div class="form-group">
             <input type="text" class="form-control input-sm" id="content" name="content" placeholder="짧은 답변" />
         </div>
@@ -103,8 +103,8 @@
     <hr/>
     <form class="form-inline" method="POST" action="/comments/write">
         {{ csrf_field() }}
-        <input type="hidden" name="parent_id" value="{{ $a->id }}"/>
-        <input type="hidden" name="parent_answer" value="1"/>
+        <input type="hidden" name="commentable_id" value="{{ $a->id }}"/>
+        <input type="hidden" name="commentable_type" value="a"/>
         <div class="form-group">
             <input type="text" class="form-control input-sm" id="content" name="content" placeholder="짧은 답변" />
         </div>
