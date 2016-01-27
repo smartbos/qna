@@ -43,11 +43,16 @@ class QnaBoardController extends Controller
     {
         $post = QnaPost::find($post_id);
         $this->authorize('qna-edit', $post);
+
+        return view('pages.edit', ['post' => $post]);
     }
 
-    public function put_edit($post_id)
+    public function put_edit(Request $request, $post_id)
     {
         $post = QnaPost::find($post_id);
         $this->authorize('qna-edit', $post);
+        $input = $request->only(['title', 'content']);
+        QnaPost::where('id', $post_id)->update($input);
+        return redirect("qna/{$post->id}");
     }
 }
