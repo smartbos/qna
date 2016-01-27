@@ -16,18 +16,18 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($posts as $post)
+    @foreach($qs as $q)
     <tr>
-        <th scope="row">{{ $post->id }}</th>
-        <td><a href="/qna/{{ $post->id }}">{{ $post->title }}</a></td>
+        <th scope="row">{{ $q->id }}</th>
+        <td><a href="/qna/{{ $q->id }}">{{ $q->title }}</a></td>
         <td>
-            <img src="{{ $post->writer->avatar }}" width="16px" height="16px" />
-            {{ $post->writer->name }}
+            <img src="{{ $q->writer->avatar }}" width="16px" height="16px" />
+            {{ $q->writer->name }}
         </td>
-        <td>{{ $post->created_at }}</td>
+        <td>{{ $q->created_at }}</td>
     </tr>
     @endforeach
     </tbody>
 </table>
-{!! $posts->links() !!}
+{!! $qs->links() !!}
 @endsection

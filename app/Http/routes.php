@@ -32,13 +32,13 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.about');
     });
 
-    Route::get('qna/write', 'QnaBoardController@get_write');
-    Route::post('qna/write', 'QnaBoardController@post_write');
-    Route::get('qna/{post_id}/edit', 'QnaBoardController@get_edit');
-    Route::put('qna/{post_id}/edit', 'QnaBoardController@put_edit');
-    Route::get('qna/{post_id}', 'QnaBoardController@get_item');
-    Route::get('qna', 'QnaBoardController@get_list');
-    Route::delete('qna/{post_id}', 'QnaBoardController@delete_item');
+    Route::get('qna/write', 'QnaController@get_write');
+    Route::post('qna/write', 'QnaController@post_write');
+    Route::get('qna/{q_id}/edit', 'QnaController@get_edit');
+    Route::put('qna/{q_id}', 'QnaController@put_edit');
+    Route::delete('qna/{q_id}', 'QnaController@delete_item');
+    Route::get('qna', 'QnaController@get_list');
+    Route::get('qna/{q_id}', 'QnaController@get_item');
 
     Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
     Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');

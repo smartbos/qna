@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQnaPostsTable extends Migration
+class CreateQnaTables extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateQnaPostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('qna_posts', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->longText('content');
@@ -29,6 +29,6 @@ class CreateQnaPostsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('qna_posts');
+        Schema::drop('questions');
     }
 }

@@ -31,8 +31,8 @@ class AuthServiceProvider extends ServiceProvider
             return $user;
         });
 
-        $gate->define('qna-edit', function ($user, $post) {
-            return $user->id === $post->writer_id;
+        $gate->define('qna-edit', function ($user, $q) {
+            return $user->id === $q->writer_id;
         });
     }
 }
