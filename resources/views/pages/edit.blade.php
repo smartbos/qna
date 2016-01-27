@@ -5,8 +5,8 @@
 <h2>질문수정하기</h2>
 
 <form method="post" action="/qna/{{ $post->id }}/edit">
-    {{ method_field('PUT') }}
     {{ csrf_field() }}
+    {{ method_field('PUT') }}
     <div class="form-group">
         <label for="title">제목</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="제목" value="{{ $post->title }}">

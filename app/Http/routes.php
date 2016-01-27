@@ -38,6 +38,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::put('qna/{post_id}/edit', 'QnaBoardController@put_edit');
     Route::get('qna/{post_id}', 'QnaBoardController@get_item');
     Route::get('qna', 'QnaBoardController@get_list');
+    Route::delete('qna/{post_id}', 'QnaBoardController@delete_item');
 
     Route::get('auth/github', 'Auth\AuthController@redirectToProvider');
     Route::get('auth/github/callback', 'Auth\AuthController@handleProviderCallback');

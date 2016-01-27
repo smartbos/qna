@@ -55,4 +55,10 @@ class QnaBoardController extends Controller
         QnaPost::where('id', $post_id)->update($input);
         return redirect("qna/{$post->id}");
     }
+
+    public function delete_item($post_id)
+    {
+        QnaPost::find($post_id)->delete();
+        return redirect('qna');
+    }
 }

@@ -18,6 +18,7 @@ class CreateQnaPostsTable extends Migration
             $table->longText('content');
             $table->integer('writer_id')->index();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

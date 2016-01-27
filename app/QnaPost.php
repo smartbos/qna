@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class QnaPost extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'title', 'content', 'writer_id',
     ];
